@@ -63,9 +63,19 @@ router.route('/')
       .then((clients) => {
         let newClients = clients.filter((client) => {
           let unix = moment(client.lastVisit).unix();
+          console.log('unix: ', unix);
+          console.log('beforeUnix: ', beforeUnix);
+          console.log('afterUnix: ', afterUnix);
           if (unix > afterUnix && unix < beforeUnix) {
+            console.log('Sanity:0');
             return client;
           }
+          // } else if (unix > afterUnix) {
+          //   console.log('Sanity:1');
+          //   return client;
+          // } else if (unix < beforeUnix) {
+          //   return client;
+          // }
         });
         res.send(newClients);
       })
